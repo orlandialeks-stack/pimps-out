@@ -6,8 +6,8 @@ import os
 import logging
 from pathlib import Path
 
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import Response
 from starlette.middleware.cors import CORSMiddleware
 
 from db import db, client
@@ -17,15 +17,22 @@ from routes_orders import orders_router
 from routes_payments import payments_router
 from routes_content import content_router, seed_content
 from routes_assistant import assistant_router
-
-Path("/app/backend/uploads").mkdir(parents=True, exist_ok=True)
+from storage import init_storage, get_object
 
 app = FastAPI(title="PIMPS OUT API")
 
 for r in (auth_router, products_router, orders_router, payments_router, content_router, assistant_router):
     app.include_router(r)
 
-app.mount("/api/uploads", StaticFiles(directory="/app/backend/uploads"), name="uploads")
+
+@app.get("/api/files/{path:path}")
+async def serve_file(path: str):
+    record = await db.files.find_one({"storage_path": path, "is_deleted": False})
+    if not record:
+        raise HTTPException(404, "File not found")
+    data, content_type = get_object(path)
+    return Response(content=data, media_type=record.get("content_type", content_type),
+                    headers={"Cache-Control": "public, max-age=86400"})
 
 origins = [o for o in [os.environ.get("FRONTEND_URL"), "http://localhost:3000"] if o]
 extra = os.environ.get("CORS_ORIGINS", "")
@@ -58,8 +65,14 @@ async def startup():
     await db.orders.create_index("session_id", unique=True)
     await db.discounts.create_index("code", unique=True)
     await db.leads.create_index("email", unique=True)
+    await db.files.create_index("storage_path", unique=True)
     await seed_admin()
     await seed_content()
+    try:
+        init_storage()
+        logger.info("Object storage initialized")
+    except Exception as e:
+        logger.error(f"Storage init failed: {e}")
     logger.info("PIMPS OUT API ready")
 
 

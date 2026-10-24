@@ -18,6 +18,7 @@ Honest status of every component, what you own, and what depends on external ser
 | AI assistant | Emergent Universal Key (billed to your Emergent balance) | Create your own OpenAI account, set your key — two functions to point at it in `routes_assistant.py` |
 | Stripe | Claimable test sandbox provisioned by Emergent | Claim it (one click — link sent by Stripe email / Payments tab) making it YOUR Stripe account; or drop in keys from your own existing Stripe account |
 | Email notifications | Not wired yet | Add Resend/SendGrid with your own account when ready |
+| Product photo storage | Emergent object storage | Migrate to your own S3-compatible bucket — procedure in `docs/DATABASE.md` |
 
 ## 3. Ongoing costs (all optional until you launch)
 

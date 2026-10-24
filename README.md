@@ -54,7 +54,7 @@ On first start the backend creates the admin account from `ADMIN_EMAIL` / `ADMIN
 ## Deploy elsewhere (summary)
 
 1. **Database**: create a free cluster at [MongoDB Atlas](https://cloud.mongodb.com), get the connection string → `MONGO_URL`.
-2. **Backend**: Render / Railway / Fly.io — build `pip install -r requirements.txt`, start `uvicorn server:app --host 0.0.0.0 --port $PORT`. Set all env vars from `.env.example`. Persistent disk recommended for `backend/uploads/` (product photos) — or move uploads to S3-compatible storage later.
+2. **Backend**: Render / Railway / Fly.io — build `pip install -r requirements.txt`, start `uvicorn server:app --host 0.0.0.0 --port $PORT`. Set all env vars from `.env.example`. Product photos are stored in object storage via `EMERGENT_LLM_KEY` (no local disk needed); when self-hosting away from Emergent, point `storage.py` at S3-compatible storage or your own OpenAI key won't be needed for storage — see `docs/OWNERSHIP.md`.
 3. **Frontend**: `yarn build` produces static files in `frontend/build` — deploy to Vercel/Netlify. Set `REACT_APP_BACKEND_URL` to your backend's public URL and rebuild. Set backend `FRONTEND_URL` to your frontend domain (CORS + cookies).
 4. **Stripe**: add your own keys; register the webhook `https://YOUR-BACKEND/api/stripe/webhook` for events `checkout.session.completed`, `checkout.session.expired`, `charge.refunded`.
 5. **AI**: set `EMERGENT_LLM_KEY` (or adapt `routes_assistant.py` to your own OpenAI key — two functions, `_openai()` and the chat route).

@@ -41,7 +41,7 @@ mongorestore --uri="YOUR_ATLAS_URL" --db=YOUR_DB_NAME ./backup-YYYY-MM-DD/YOUR_D
 
 ## Product images
 
-Images are files in `backend/uploads/` referenced by path in product documents. Copy the folder as-is when migrating; keep the same `/api/uploads/` mount (already in `server.py`).
+Images are stored in Emergent object storage (uploaded via `POST /api/admin/uploads`, served via `GET /api/files/...`, references tracked in the `files` collection with soft-delete). To migrate: list `db.files`, download each object, and re-upload to your own S3-compatible bucket, then update the stored paths.
 
 ## Moving to PostgreSQL/Supabase instead?
 

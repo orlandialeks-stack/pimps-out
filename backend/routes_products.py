@@ -8,9 +8,9 @@ from fastapi import APIRouter, HTTPException, UploadFile, File, Depends
 from db import db, pub, pubs
 from models import ProductIn, TaxonomyIn
 from auth import require_admin
+from storage import put_object, APP_NAME
 
 products_router = APIRouter(prefix="/api", tags=["products"])
-UPLOAD_DIR = "/app/backend/uploads"
 ALLOWED = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp", "image/gif": ".gif"}
 
 
@@ -115,11 +115,17 @@ async def admin_upload(file: UploadFile = File(...), _: dict = Depends(require_a
     ext = ALLOWED.get(file.content_type)
     if not ext:
         raise HTTPException(400, "Only JPG, PNG, WEBP or GIF images are allowed")
-    fname = f"{uuid.uuid4().hex}{ext}"
-    path = f"{UPLOAD_DIR}/{fname}"
-    with open(path, "wb") as f:
-        f.write(await file.read())
-    return {"url": f"/api/uploads/{fname}"}
+    data = await file.read()
+    if len(data) > 15 * 1024 * 1024:
+        raise HTTPException(400, "Image too large (max 15 MB)")
+    path = f"{APP_NAME}/uploads/{uuid.uuid4().hex}{ext}"
+    result = put_object(path, data, file.content_type)
+    await db.files.insert_one({
+        "storage_path": result["path"], "original_filename": file.filename,
+        "content_type": file.content_type, "size": result.get("size", len(data)),
+        "is_deleted": False, "created_at": datetime.now(timezone.utc).isoformat(),
+    })
+    return {"url": f"/api/files/{result['path']}"}
 
 
 @products_router.post("/admin/taxonomies")
