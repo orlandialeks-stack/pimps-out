@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/$/, "");
+// Fallback keeps the site functional on static hosts (e.g. Vercel) even when
+// REACT_APP_BACKEND_URL is not configured. A dashboard env var takes precedence.
+export const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || "https://pimpsout-store.preview.emergentagent.com").replace(/\/$/, "");
 
 export const API = axios.create({
   baseURL: `${BACKEND_URL}/api`,
