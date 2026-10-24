@@ -4,8 +4,9 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import StreamingResponse, Response
-from openai import OpenAI
 from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone
+from emergentintegrations.llm.openai.text_to_speech import OpenAITextToSpeech
+from emergentintegrations.llm.openai.speech_to_text import OpenAISpeechToText
 
 from db import db
 from models import ChatIn, TtsIn
@@ -16,9 +17,12 @@ LANGS = {"en": "English", "it": "Italian", "es": "Spanish", "ru": "Russian"}
 _sessions = {}
 
 
-def _openai() -> OpenAI:
-    return OpenAI(api_key=os.environ["EMERGENT_LLM_KEY"],
-                  base_url="https://integrations.emergentagent.com/v1")
+def _tts() -> OpenAITextToSpeech:
+    return OpenAITextToSpeech(api_key=os.environ["EMERGENT_LLM_KEY"])
+
+
+def _stt() -> OpenAISpeechToText:
+    return OpenAISpeechToText(api_key=os.environ["EMERGENT_LLM_KEY"])
 
 
 async def _system_prompt(language: str) -> str:
@@ -97,8 +101,9 @@ async def chat(data: ChatIn):
 @assistant_router.post("/tts")
 async def tts(data: TtsIn):
     try:
-        audio = _openai().audio.speech.create(model="tts-1", voice=data.voice, input=data.text[:4000])
-        return Response(content=audio.content, media_type="audio/mpeg")
+        audio = await _tts().generate_speech(text=data.text[:4000], model="tts-1",
+                                             voice=data.voice, response_format="mp3")
+        return Response(content=audio, media_type="audio/mpeg")
     except Exception as e:
         raise HTTPException(500, f"Voice synthesis unavailable: {e}")
 
@@ -110,7 +115,7 @@ async def stt(file: UploadFile = File(...)):
         import io
         buf = io.BytesIO(content)
         buf.name = file.filename or "audio.webm"
-        result = _openai().audio.transcriptions.create(model="whisper-1", file=buf)
+        result = await _stt().transcribe(file=buf, model="whisper-1")
         return {"text": result.text}
     except Exception as e:
         raise HTTPException(500, f"Speech recognition unavailable: {e}")
