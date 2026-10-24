@@ -1,14 +1,16 @@
 import axios from "axios";
 
+export const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/$/, "");
+
 export const API = axios.create({
-  baseURL: `${process.env.REACT_APP_BACKEND_URL}/api`,
+  baseURL: `${BACKEND_URL}/api`,
   withCredentials: true,
 });
 
 export const imgUrl = (p) => {
   if (!p) return "";
   if (p.startsWith("http")) return p;
-  return `${process.env.REACT_APP_BACKEND_URL}${p}`;
+  return `${BACKEND_URL}${p}`;
 };
 
 export const eur = (n) =>

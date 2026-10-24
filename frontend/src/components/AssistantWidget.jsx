@@ -3,7 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircle, X, Send, Mic, MicOff, Volume2, VolumeX } from "lucide-react";
 import { toast } from "sonner";
 
-const BACKEND = process.env.REACT_APP_BACKEND_URL;
+import { BACKEND_URL } from "../lib/api";
+
+const BACKEND = BACKEND_URL;
 const LANGS = [
   { code: "en", label: "EN" },
   { code: "it", label: "IT" },

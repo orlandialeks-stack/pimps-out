@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -17,8 +17,8 @@ const LOOKS = [
 
 function useCountdown(target) {
   const [left, setLeft] = useState("");
-  useState(() => {
-    if (!target) return;
+  useEffect(() => {
+    if (!target) { setLeft(""); return; }
     const tick = () => {
       const d = new Date(target) - Date.now();
       if (d <= 0) return setLeft("LIVE SOON");
@@ -28,7 +28,7 @@ function useCountdown(target) {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  });
+  }, [target]);
   return left;
 }
 
