@@ -7,6 +7,18 @@ export const API = axios.create({
   withCredentials: true,
 });
 
+// If a host (e.g. Vercel SPA fallback) answers /api/* with HTML instead of JSON,
+// treat it as an error so pages render their fallback states instead of crashing.
+API.interceptors.response.use(
+  (res) => {
+    if (typeof res.data === "string") {
+      return Promise.reject(new Error("API unreachable: received non-JSON response"));
+    }
+    return res;
+  },
+  (err) => Promise.reject(err)
+);
+
 export const imgUrl = (p) => {
   if (!p) return "";
   if (p.startsWith("http")) return p;

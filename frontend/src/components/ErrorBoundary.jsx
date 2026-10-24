@@ -3,11 +3,11 @@ import { Component } from "react";
 export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, message: "" };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+  static getDerivedStateFromError(error) {
+    return { hasError: true, message: error?.message || "Unknown error" };
   }
 
   componentDidCatch(error, info) {
@@ -28,6 +28,12 @@ export default class ErrorBoundary extends Component {
         <p style={{ color: "#a1a1aa", fontSize: 14, maxWidth: 420, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
           The page hit an unexpected error. Our rule: we fix our own mistakes — reload and it should be gone.
         </p>
+        {this.state.message && (
+          <p style={{ color: "#52525b", fontSize: 11, maxWidth: 480, fontFamily: "'JetBrains Mono', monospace", wordBreak: "break-word" }}
+            data-testid="error-boundary-message">
+            {this.state.message}
+          </p>
+        )}
         <button onClick={() => window.location.reload()} data-testid="error-boundary-reload"
           style={{ background: "#E8272A", color: "#fff", padding: "14px 32px", fontWeight: 700,
             textTransform: "uppercase", letterSpacing: "0.15em", border: "none", cursor: "pointer" }}>

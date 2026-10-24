@@ -129,14 +129,14 @@ export default function Home() {
       )}
 
       {/* FEATURED PRODUCTS */}
-      {featured?.length > 0 && (
+      {Array.isArray(featured) && featured.length > 0 && (
         <section className="px-4 sm:px-8 lg:px-16 py-16" data-testid="featured-section">
           <Reveal className="flex items-end justify-between mb-10">
             <h2 className="font-display font-black uppercase italic text-4xl sm:text-5xl">Featured</h2>
             <Link to="/shop" className="font-mono text-xs text-zinc-400 hover:text-brand-soft uppercase tracking-widest">View all →</Link>
           </Reveal>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {featured.slice(0, 4).map((p, i) => (
+            {(Array.isArray(featured) ? featured : []).slice(0, 4).map((p, i) => (
               <Reveal key={p.id} delay={i * 0.08}>
                 <Link to={`/shop/${p.slug}`} className="group block" data-testid={`featured-product-${i}`}>
                   <div className="aspect-[3/4] overflow-hidden bg-coal relative">

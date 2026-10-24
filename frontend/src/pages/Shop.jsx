@@ -19,8 +19,8 @@ export default function Shop() {
     queryKey: ["taxonomies"],
     queryFn: async () => (await API.get("/taxonomies")).data,
   });
-  const cats = (taxonomies || []).filter((t) => t.type === "category");
-  const colls = (taxonomies || []).filter((t) => t.type === "collection");
+  const cats = Array.isArray(taxonomies) ? taxonomies.filter((t) => t.type === "category") : [];
+  const colls = Array.isArray(taxonomies) ? taxonomies.filter((t) => t.type === "collection") : [];
 
   const notify = async (e) => {
     e.preventDefault();
@@ -53,7 +53,7 @@ export default function Shop() {
         </div>
       )}
 
-      {products?.length === 0 && (
+      {Array.isArray(products) && products.length === 0 && (
         <div className="mt-16 max-w-2xl" data-testid="shop-empty-state">
           <div className="card-dark p-8 sm:p-12">
             <p className="font-mono text-xs text-brand-soft tracking-[0.3em] mb-4">PRE-LAUNCH</p>
@@ -73,7 +73,7 @@ export default function Shop() {
       )}
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12">
-        {(products || []).map((p, i) => (
+        {(Array.isArray(products) ? products : []).map((p, i) => (
           <Reveal key={p.id} delay={Math.min(i * 0.05, 0.4)}>
             <Link to={`/shop/${p.slug}`} className="group block" data-testid={`product-card-${p.slug}`}>
               <div className="aspect-[3/4] overflow-hidden bg-coal relative clip-frame">
