@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 240 6% 4%;
+        --foreground: 0 0% 98%;
+        --card: 240 5% 8%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 5% 7%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 355 78% 53%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 240 4% 12%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 4% 12%;
+        --muted-foreground: 240 5% 65%;
+        --accent: 240 4% 14%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 72% 45%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 100% / 0.1;
+        --input: 0 0% 100% / 0.14;
+        --ring: 355 78% 53%;
+        --radius: 0.25rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-white/10;
+    }
+    html {
+        background: #09090B;
+    }
+    body {
+        @apply bg-obsidian text-zinc-100 font-body antialiased;
+        -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+        background: #E8272A;
+        color: #fff;
+    }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #09090B; }
+    ::-webkit-scrollbar-thumb { background: #26262b; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #E8272A; }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 bg-brand text-white font-display font-bold uppercase tracking-[0.15em] text-sm px-8 py-4 transition-colors duration-300 hover:bg-brand-soft;
+    }
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2 border border-white/25 text-white font-display font-bold uppercase tracking-[0.15em] text-sm px-8 py-4 transition-colors duration-300 hover:border-brand hover:text-brand-soft;
+    }
+    .eyebrow {
+        @apply font-mono text-xs uppercase tracking-[0.3em] text-brand-soft;
+    }
+    .input-dark {
+        @apply w-full bg-coal border border-white/10 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-brand transition-colors;
+    }
+    .card-dark {
+        @apply bg-coal border border-white/10;
+    }
+    .clip-frame {
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+    }
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+        border-left-style: inherit;
+        border-right-style: inherit;
+        border-top-style: inherit;
+        border-bottom-style: inherit;
+        border-left-color: inherit;
+        border-right-color: inherit;
+        border-top-color: inherit;
+        border-bottom-color: inherit;
+    }
+}

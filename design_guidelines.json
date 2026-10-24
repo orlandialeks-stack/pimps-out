@@ -1,0 +1,113 @@
+{
+  "project_name": "PIMPS OUT — Premium Streetwear E-Commerce",
+  "app_type": "e-commerce (premium streetwear, hybrid fullstack)",
+  "brand_identity": {
+    "name": "PIMPS OUT",
+    "tagline": "We don't follow trends. We create our own rules.",
+    "central_message": "We don't follow trends. We create our own rules.",
+    "subtext": "PIMPS OUT — Premium streetwear for those who choose their own direction.",
+    "core_values": [
+      "Individuality",
+      "Confidence",
+      "Creativity",
+      "Contemporary Streetwear",
+      "Unapologetic Self-Expression"
+    ],
+    "visual_vibe": "Awwwards Site-of-the-Day editorial fashion luxury. Dark obsidian minimalism, raw brutalist kinetic typography, moody spotlight photography, razor-sharp edge contrast."
+  },
+  "svg_logo_concept": {
+    "mark": "Architectural monogram consisting of an interlocking bold geometric 'P' and inverted crown 'O' frame built from sharp angled path cuts (3px solid stroke with stark metallic fill). Can be rendered as SVG at header and favicon size (32x32, 64x64, 180x180).",
+    "wordmark": "PIMPS OUT written in ultra-wide heavy condensed display font with custom letter-spacing tracking-[0.25em] and a subtle diagonal slashed strikethrough on the letter 'O'.",
+    "svg_markup_guide": "<svg viewBox='0 0 200 40' fill='none' xmlns='http://www.w3.org/2000/svg'><text x='0' y='30' fill='%23FFFFFF' font-family='Barlow Condensed, Syne, sans-serif' font-weight='900' font-size='28' letter-spacing='6'>PIMPS OUT</text><rect x='0' y='36' width='190' height='2' fill='%23E11D48'/></svg>"
+  },
+  "typography": {
+    "primary_display_heading": "Barlow Condensed, Syne, or Clash Display (weight 800/900 for hero headlines & section titles)",
+    "body_and_ui": "General Sans, Plus Jakarta Sans, or DM Sans (clean high-contrast legibility for descriptions & tabular data)",
+    "monospace_accent": "JetBrains Mono or Space Mono (for serial numbers, batch tags, drop dates, release countdowns, pricing metrics)",
+    "hierarchy_rules": {
+      "H1_Hero": "text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none",
+      "H2_Section": "text-2xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-tight leading-tight",
+      "H3_Subheading": "text-xl sm:text-2xl font-semibold uppercase tracking-wide",
+      "H4_Card": "text-lg sm:text-xl font-medium tracking-normal",
+      "Overline_Eyebrow": "text-xs uppercase tracking-[0.3em] font-mono text-rose-500",
+      "Body_Text": "text-sm sm:text-base leading-relaxed text-zinc-300",
+      "Caption_Mono": "text-xs font-mono tracking-wider text-zinc-500"
+    }
+  },
+  "colors": {
+    "archetype": "LUXURY STREETWEAR & TACTICAL MINIMALISM (Dark Theme Primary)",
+    "palette": {
+      "background": "#09090B",
+      "background_card": "#121215",
+      "background_elevated": "#1A1A1E",
+      "foreground": "#FAFAFA",
+      "foreground_muted": "#A1A1AA",
+      "primary_brand": "#E11D48",
+      "primary_hover": "#F43F5E",
+      "accent_gold": "#F59E0B",
+      "tactical_border": "rgba(255, 255, 255, 0.12)",
+      "border_active": "rgba(225, 29, 72, 0.5)",
+      "glass_overlay": "rgba(9, 9, 11, 0.75)"
+    },
+    "contrast_rules": "Maintain APCA compliant high-contrast white/light text on obsidian surfaces. Hover states MUST explicitly define background + foreground (e.g., hover:bg-rose-600 hover:text-white). Limit primary rose/crimson red to focal CTAs, drop badges, and kinetic highlights."
+  },
+  "layout_and_spacing": {
+    "container_padding": "px-4 sm:px-8 lg:px-16 py-12 lg:py-24",
+    "bento_grid_mode": "MODE A: TETRIS GRID for Lookbooks & Editorial Collections. Asymmetrical 12-column span with uneven card heights (e.g., Hero col-span-8, Tall col-span-4 row-span-2).",
+    "high_density_mode": "MODE B: HIGH DENSITY GRID for Product Catalogue & Admin Dashboard tables with tight gap-4/gap-6.",
+    "margin_philosophy": "Generous 2-3x breathing space. No text collisions with container borders; always enforce internal p-6 or p-8."
+  },
+  "motion_and_interactions": {
+    "lenis_scrolling": "Smooth momentum scrolling enabled globally using @studio-freight/lenis or Lenis package for weighted editorial feel.",
+    "kinetic_hero_reveal": "Masked line-by-line staggered text reveal using framer-motion initial={{ y: '100%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}.",
+    "editorial_marquee": "Continuous slow drifting ticker (react-fast-marquee or CSS keyframes) with low opacity outline typography text-7xl font-black over dark background.",
+    "hover_effects": "Image zoom transform scale-105 duration-500 ease-out with dark gradient vignette overlay reveal on product cards."
+  },
+  "components_and_pages": {
+    "header": "Sticky glassmorphism header with backdrop-blur-xl bg-zinc-950/80 border-b border-white/10. Logo, Shop/Catalogue, Lookbook, About, Cart Drawer trigger, Account, Admin links.",
+    "pre_launch_banner": "Configurable Coming Soon toggleable bar with release countdown timer, VIP early access email opt-in, and pre-order reservation badge.",
+    "product_catalogue": "Editorial grid with aspect-[3/4] portrait photos, size variant selector pills (S, M, L, XL, XXL), color swatch dots, quick add-to-cart drawer button, and pre-launch badges.",
+    "product_detail": "High-impact split layout: sticky vertical gallery thumbnail stack on left, bold specs, size recommendation guide, fabric composition, add to bag CTA, and AI outfit stylist recommendation.",
+    "cart_drawer": "Slide-out sheet with free shipping progress bar, item breakdown, quantity modifiers, promo code input, and instant checkout button.",
+    "ai_shopping_assistant": "Floating dark velvet widget with voice input option, product recommendations based on streetwear vibe/occasion, size finder prompt, and interactive chat.",
+    "admin_dashboard": "Command-center high density layout with metrics charts (Recharts), inventory toggle, coming-soon message configuration, pre-launch customer leads, orders manager, and SVG logo manager.",
+    "editorial_marquee_section": "Subtle low-contrast marquee repeating: 'WE DON'T FOLLOW TRENDS — WE CREATE OUR OWN RULES — PIMPS OUT RELEASE 001 —' with slow drift."
+  },
+  "image_urls": {
+    "hero_banner": "https://images.unsplash.com/photo-1528120369764-0423708119ae?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "editorial_lookbook_1": "https://images.unsplash.com/photo-1756451182421-d2a1961638c9?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "editorial_lookbook_2": "https://images.unsplash.com/photo-1532074198010-97d0c3700b7a?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "editorial_lookbook_3": "https://images.unsplash.com/photo-1697924293303-34488b60bf36?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "product_hoodie_1": "https://images.pexels.com/photos/30257616/pexels-photo-30257616.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "product_hoodie_2": "https://images.unsplash.com/photo-1688111421205-a0a85415b224?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "product_hoodie_3": "https://images.unsplash.com/photo-1611817757591-c3f345024273?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "product_jacket_1": "https://images.unsplash.com/photo-1771310961652-1af9711686ec?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "product_jacket_2": "https://images.pexels.com/photos/34432105/pexels-photo-34432105.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "product_jacket_3": "https://images.pexels.com/photos/29817596/pexels-photo-29817596.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "about_campaign": "https://images.pexels.com/photos/18956666/pexels-photo-18956666.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  },
+  "testing_attributes": {
+    "rule": "All interactive and key informational elements MUST include a data-testid attribute formatted in kebab-case.",
+    "examples": [
+      "data-testid='hero-headline'",
+      "data-testid='shop-collection-button'",
+      "data-testid='discover-philosophy-button'",
+      "data-testid='product-card-1'",
+      "data-testid='add-to-cart-button'",
+      "data-testid='cart-drawer-toggle'",
+      "data-testid='ai-assistant-widget-trigger'",
+      "data-testid='admin-dashboard-link'",
+      "data-testid='pre-launch-notify-input'",
+      "data-testid='pre-launch-notify-submit'"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Apply dark theme as default background #09090B with high contrast white text.",
+    "Implement kinetic hero section with line-by-line masked reveal for 'We don't follow trends. We create our own rules.'",
+    "Include pre-launch configurable coming-soon toggle section in Admin Dashboard.",
+    "Build SVG logo component matching PIMPS OUT brand aesthetic.",
+    "Ensure Lenis smooth scroll and Framer Motion staggered animations are integrated.",
+    "Add data-testid attributes to all buttons, forms, links, and key indicators.",
+    "Use standard sonner toasts for feedback when user adds items to cart or submits pre-launch email."
+  ]
+}
