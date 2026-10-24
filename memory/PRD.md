@@ -19,6 +19,7 @@ React 19 + Tailwind + Framer Motion + Lenis (frontend) · FastAPI + Motor (backe
 - Stripe: Flow A sandbox provisioned (acct_1UTNtXPWKha7jswQ), dynamic checkout from server-validated cart, discount coupons, webhook + status polling, stock decrement on payment, refunds. TEST mode.
 - AI assistant: streaming chat with real catalogue/policy injection (never invents products; pre-launch aware), 4 languages, voice (TTS replies + mic STT), escalation to contact.
 - Portability: GitHub-ready repo (no secrets committed, .env.example files), README, docs/OWNERSHIP.md, docs/DATABASE.md, docs/ADD_FIRST_PRODUCT.md.
+- Uploads: Emergent object storage (deployment-safe), served via /api/files, soft-delete tracking in files collection.
 
 ## Verified
 - Admin login, taxonomy create, product create/publish/list/delete, discount create, checkout session creation, payment status polling, leads, assistant chat streaming, TTS (real MP3), STT (round-trip transcription correct), admin dashboard UI, homepage 375/768/1366, shop empty state.
